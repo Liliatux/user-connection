@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Connexion</title>
+	<link rel="stylesheet" href="node_modules/semantic-ui-css/semantic.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Project login</h1>
+	<div class="ui middle aligned center aligned grid">
+		<form class="ui large form" action="/public" method="post">
+			<div class="ui error message"></div>
+			<div class="field">
+				<label for="ident">Identifiant</label>
+				<div class="ui left icon input">
+					<i class="user blue icon"></i>
+					<input id="ident" type="text" name="id" placeholder="Identifiant">
+				</div>
+			</div>
+			<div class="field">
+				<label for="motDePasse">Mot de passe</label>
+				<div class="ui left icon input">
+					<i class="lock blue icon"></i>
+					<input id="motDePasse" type="password" name="mdp" placeholder="Mot de passe">
+				</div>
+			</div>
+
+			<button class="ui fluid large blue button">Envoyer</button>
+		</form>
+	</div>
+	
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
