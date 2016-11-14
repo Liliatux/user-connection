@@ -10,18 +10,19 @@ app.use(express.static(__dirname + '/public'));
 
 var user = {
 	id: 'Zélia',
-	mdp: 'test'
+	mdp: '$2a$10$mL2HYDvGDrPuEmlQ/yASbOH7l6VXOuXIvCGNNn5kdINp.hx24fndK'
 };
 
 var login = {
 	register: function(req, res){
 		var post = req.body;
-		if(post.id === user.id &&
-			post.mdp === user.mdp){
-			res.send({err: false, msg:'Vous êtes connecté'});
-		} else{
-			res.send({err: true, msg:"Erreur vous n'avez pas entré le bon login"});
-		}		
+		bcrypt.compare(user.mdp, post.mdp, function(err, hash){
+			if(hash){
+				res.send({err: true, msg:"Erreur vous n'avez pas entré le bon login"});
+			} else
+				res.send({err: false, msg:'Vous êtes connecté'});
+			}		
+		});
 	}
 }
 
