@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.1.1",
-    "semantic-ui-css": "^2.2.4"
+    "semantic-ui-css": "^2.2.4",
+    "sweetalert2": "^6.1.0"
   }
 }

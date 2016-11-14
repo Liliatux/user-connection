@@ -7,23 +7,32 @@
 		},
 
 		listeners: function(){
-			$("button").on('submit', this.login.bind(this));
+			$("form").on('submit', this.login.bind(this));
 		},
 
 		login: function(event){
 			event.preventDefault();
-			this.ajax();
+			var login = {
+				id: $("#ident").val(),
+				mdp: $("#motDePasse").val()
+			};
+			this.ajaxLogin(login);
 		},
 
-		ajax: function(){
-			$.ajax(this.url)
-			.done(this.ajaxDone)
-			.fail()
-			.always();
-		},
-
-		ajaxDone: function(data){
-			console.log(data);
+		ajaxLogin: function(login){
+			$.ajax({
+				url: $("form").attr("action"),
+				method: 'post',
+				data: login,
+				success: function(data){
+					if(data.err === true){
+						$("#error").append('<div class="ui error message">'+ data.msg +'</div>');
+						$("form").trigger('reset');
+					} else{
+						$("html").html(data.msg);
+					}
+				}
+			});
 		}
 	}
 

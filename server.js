@@ -1,6 +1,7 @@
 var  express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var bcrypt = require('bcrypt');
 
 var app = express();
 
@@ -10,18 +11,17 @@ app.use(express.static(__dirname + '/public'));
 var user = {
 	id: 'Zélia',
 	mdp: 'test'
-}
+};
 
 var login = {
 	register: function(req, res){
 		var post = req.body;
-		var urlServ = 'http://localhost:2314/';
-
-		if(post.id === user.id){
-			res.send('Vous êtes connecté');
+		if(post.id === user.id &&
+			post.mdp === user.mdp){
+			res.send({err: false, msg:'Vous êtes connecté'});
 		} else{
-			res.send('Erreur');
-		}
+			res.send({err: true, msg:"Erreur vous n'avez pas entré le bon login"});
+		}		
 	}
 }
 
