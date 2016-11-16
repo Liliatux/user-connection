@@ -4,27 +4,31 @@ var fs = require('fs');
 var bcrypt = require('bcrypt');
 
 var app = express();
+var saltRounds = 10;
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
 var user = {
 	id: 'Zélia',
-	mdp: '$2a$10$mL2HYDvGDrPuEmlQ/yASbOH7l6VXOuXIvCGNNn5kdINp.hx24fndK'
+	mdp: 'test'
 };
 
 var login = {
 	register: function(req, res){
 		var post = req.body;
-		bcrypt.compare(user.mdp, post.mdp, function(err, hash){
-			if(hash){
-				res.send({err: true, msg:"Erreur vous n'avez pas entré le bon login"});
-			} else
-				res.send({err: false, msg:'Vous êtes connecté'});
-			}		
+
+		bcrypt.hash(user.mdp, saltRounds, function(err, hash){
+			bcrypt.compare(post.mdp, hash, function(err, areSame){
+				if(areSame && post.id === user.id){
+					res.send({err: false, msg:'Vous êtes connecté'});
+				} else{
+					res.send({err: true, msg:"Erreur vous n'avez aps entré le bon login"});
+				} 
+			});		
 		});
 	}
-}
+};
 
 app.post('/public', login.register);
 

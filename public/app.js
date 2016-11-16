@@ -26,7 +26,7 @@
 				data: login,
 				success: function(data){
 					if(data.err === true){
-						$("#error").append('<div class="ui error message">'+ data.msg +'</div>');
+						$("#error").show().html(data.msg);
 						$("form").trigger('reset');
 					} else{
 						$("html").html(data.msg);

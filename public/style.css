@@ -3,3 +3,7 @@
 	width: 300px;
 	text-align: center;
 }
+
+#error{
+	display: none;
+}
