@@ -14,26 +14,25 @@
 		//récupération de la valeur des input en un objet login
 		login: function(event){
 			event.preventDefault();
-			var login = {
+			var identifiant = {
 				id: $("#ident").val(),
 				mdp: $("#motDePasse").val()
 			};
-			this.ajaxLogin(login);
+			this.ajaxLogin(identifiant);
 		},
 
 		//Envoie des valeurs du formulaire au serveur
-		ajaxLogin: function(login){
+		ajaxLogin: function(identifiant){
 			$.ajax({
 				url: $("form").attr("action"),
 				method: 'post',
-				data: login,
+				data: identifiant,
 				success: function(data){
-					if(data.err === true){
-						$("#error").show().html(data.msg);
-						$("form").trigger('reset');
-					} else{
-						$("html").html(data.msg);
-					}
+					$("html").html(data);
+				},
+				error: function(data){
+					$("#error").show().html("Erreur vous n'avez pas entré le bon login");
+					$("form").trigger('reset');
 				}
 			});
 		}
