@@ -6,10 +6,12 @@
 			this.listeners();
 		},
 
+		//soumission du formulaire
 		listeners: function(){
 			$("form").on('submit', this.login.bind(this));
 		},
 
+		//récupération de la valeur des input en un objet login
 		login: function(event){
 			event.preventDefault();
 			var login = {
@@ -19,6 +21,7 @@
 			this.ajaxLogin(login);
 		},
 
+		//Envoie des valeurs du formulaire au serveur
 		ajaxLogin: function(login){
 			$.ajax({
 				url: $("form").attr("action"),
